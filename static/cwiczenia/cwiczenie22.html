@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        *{
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    font-family: monospace;
+}
+
+h1{
+    color: red;
+    margin-bottom: 20px;
+}
+
+/* 2 */
+
+.ex{
+    display: flex;
+    flex-direction: row;
+    width: 600px;
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.events2{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.events2 button.ev2{
+    width: 200px;
+}
+
+h3.show{
+    text-align: center;
+    width: 100px;
+    padding: 10px;
+    border: 2px solid black;
+    background-color: lightskyblue;
+}
+
+.events3, .components5{
+    font-size: 20px;
+}
+
+ul li{
+    margin: 20px 20px;
+    display: flex;
+}
+
+ul li div input{
+    border: 2px solid black;
+    border-radius: 50%;
+    width: 40px;
+}
+
+.ev23-red{
+    color: red;
+}
+
+.ev23-blue{
+    color: blue;
+}
+
+.ex1-7{
+    display: flex;
+    flex-direction: row;
+}
+
+.ex1-7 img{
+    width: 150px;
+    
+}
+    </style>
+</head>
+<body>
+    <h1>02: Events</h1>
+    <div id="app">
+        <div class="events2">
+            <span>Dyrektywa v-show, o widoczności diva decyduje zmienna show</span>
+            <br>
+            <button class="ev2" @click="showElement">{{status}}</button>
+            <br>
+            <h3 class="show" v-show="show">element</h3>
+        </div>
+    </div>
+    
+
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    show: false,
+                    status: "Pokaż",
+
+                }
+            },
+
+            methods:{
+                showElement(){
+                    this.show == false ? this.status = "Ukryj" : this.status = "Pokaż"
+                    this.show = !this.show
+                    
+                },
+            }
+        }).mount("#app")
+    </script>
+</body>
+</html>

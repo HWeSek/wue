@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link href="../style.css" rel="stylesheet">
+</head>
+<body>
+    <h1>01: Events - simple</h1>
+    <div id="app">
+
+        <div class="ex">
+            <span>cw 01 - kliknij w diva</span>
+            <div @click="onClick">&nbsp;&nbsp;CLICK ME!</div>
+               <!-- LUB -->
+    <!-- <div @click="onClick">CLICK ME!</div> -->
+            <span>{{ clicked }}</span>
+        </div>
+
+        <div class="ex">
+            <span>cw 02 - wartość z selecta&nbsp;&nbsp;</span>
+            <select @change="onChange">
+                <option value="option 1">option 1</option>
+                <option value="option 2">option 2</option>
+                <option value="option 3">option 3</option>
+            </select>
+            <span>{{ changed }}</span>
+        </div>
+
+        <div class="ex">
+            <span>cw 03 - wartość z input range&nbsp;&nbsp;</span>
+            <input type="range" @input="onInput" min="0" max="100" step="1">&nbsp;
+            <span>{{ scrolled }}</span>
+        </div>
+
+        <div class="ex">
+            <span>cw 04 - wartość (value) z chechboxa&nbsp;&nbsp;</span>
+            <input type="checkbox" @change="onCheckbox">&nbsp;
+            <span>{{ checked }}</span>
+        </div>
+
+        <div class="ex">
+            <span>cw 05 - klik buttona&nbsp;&nbsp;</span>
+            <input type="submit" @click="onButtona1">&nbsp;
+            <span>{{ increased }}</span>
+        </div>
+
+        <div class="ex">
+            <span>cw 06 - klik buttona v2&nbsp;&nbsp;</span>
+            <input type="submit" @click="onButtona2">&nbsp;
+            <span>{{ powered }}</span>
+        </div>
+
+    </div>
+    
+
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    clicked: "",
+                    changed: "",
+                    scrolled: "",
+                    checked: "",
+                    increased: 2,
+                    powered: 2,
+                }
+            },
+
+            methods:{
+                onClick(){
+                    this.clicked = "CLICKED YAAAA"
+                    alert(this.clicked)
+                },
+
+                onChange(e){
+                   this.changed = e.target.value
+                },
+
+                onInput(e){
+                    this.scrolled = e.target.value
+                },
+
+                onCheckbox(e){
+                    this.checked = e.target.value
+                },
+
+                onButtona1(e){
+                    this.increased += 1
+                },
+
+                onButtona2(e){
+                    this.powered = this.powered * 2
+                }
+            }
+        }).mount("#app")
+    </script>
+</body>
+</html>

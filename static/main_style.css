@@ -1,0 +1,22 @@
+h1 {
+    color: cornflowerblue;
+}
+
+.fileBox {
+    display: block;
+    text-align: center;
+    width: 150px;
+    border: 2px crimson solid;
+    background-color: rgb(252, 252, 144);
+
+}
+
+#container {
+    margin: auto;
+}
+
+#container a {
+    margin: 10px;
+    text-decoration: none;
+    padding: 10px;
+}

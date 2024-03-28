@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        *{
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    font-family: monospace;
+    }
+
+    h1{
+        color: red;
+        margin-bottom: 20px;
+    }
+
+    .normal {
+        font-size: small;
+        color: black;
+    }
+
+    .insane{
+        font-size: large;
+        color: red;
+    }
+    </style>
+</head>
+<body>
+    <h1>03: FORMULARZ DSHAOUADAHSAPOIAEDEDNSAAD</h1>
+    <div id="app">
+        <div>
+            <br>
+            <form action="" method="POST">
+                <table>
+                    <tr>
+                        <th>Akcesoria</th>
+                        <th>Forma odbioru</th>
+                        <th>Potwierdzenie</th>
+                    </tr>
+                    <tr>
+                        <td><label><input type="checkbox" v-model="mysz" true-value="tak" false-value="nie"/> Myszka </label></td>
+                        <td><label><input type="radio" name="how" v-model="dostawa" value="kurier" /> kurier</label></td>
+                        <td><label><input type="checkbox" v-model="aggred">POTWEIRDDZAAM</label></td>
+                    </tr>
+                    <tr>
+                        <td><label><input type="checkbox" v-model="laptop" true-value="tak" false-value="nie"/> Laptop </label></td>
+                        <td><label><input type="radio" name="how" v-model="poczta" value="poczta" /> poczta</label></td>
+                        <td><label><input type="submit" :disabled="status"></label></td>
+                    </tr>
+                    <tr>
+                       <td><label><input type="checkbox" v-model="pc" true-value="tak" false-value="nie"/> PC </label></td>
+                       <td><label><input type="radio" name="how" v-model="osobiscie" value="osobiscie" /> osobiscie</label></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <select v-model="selected">
+                                
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+    </div>
+
+
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    products: [
+
+                    { name: "Myszka", checked: 'nie', price: 30, currency: "PLN" },
+                    { name: "Laptop", checked: 'nie', price: 2500, currency: "GBP" },
+                    { name: "Komputer", checked: 'nie', price: 4000, currency: "PLN" },
+                    { name: "Monitor", checked: 'nie', price: 1000, currency: "GBP" },
+                    { name: "Głośniki", checked: 'nie', price: 600, currency: "USD" }
+                ],
+                options: [
+
+                   { option: 'Kurier' },
+                   { option: 'Poczta' },
+                   { option: 'Osobiście' }
+
+                ],
+                aggred: false,
+                selected: undefined
+                }
+            },
+
+            methods:{
+                
+            },
+            computed: {
+                status: function(){
+                    if(this.aggred && (this.mysz == 'tak' || this.laptop == 'tak' || this.pc == 'tak') && (this.dostawa || this.poczta || this.osobiscie)){
+                        return false
+                    }else{
+                        return true
+                    }
+                }
+            }
+        }).mount("#app")
+    </script>
+</body>
+</html>

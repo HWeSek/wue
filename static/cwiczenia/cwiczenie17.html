@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../main_style.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Document</title>
+    <style>
+        .dark {
+            background-color: darkgray;
+        }
+        .green {
+            background-color: rgb(188, 221, 138);
+        }
+
+        .element {
+            width: 200px;
+            height: 200px;
+            display: inline-block;
+            margin: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h1>CW07 </h1>
+        <hr>
+        <div v-for="car in cars" class="element" :class = "getClass(car.year)">
+            <h3>{{ car.name }} {{car.year}}</h3>
+            <img :src = "car.img" width="190">
+        </div>
+    </div>
+</body>
+<script>
+    const app = Vue.createApp({
+
+        data() {
+           return {
+                cars: [
+                    {name: "GAZ 24 Wołga", year: 1984, img: "https://upload.wikimedia.org/wikipedia/commons/a/a6/GAZ-24_%22Volga%22_in_Estonia.jpg"},
+                    {name: "Toyota MR2", year: 1996, img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Toyota_mr2_sw20_front_left_3.jpg/640px-Toyota_mr2_sw20_front_left_3.jpg"},
+                    {name: "Opel Astra", year: 2001, img: "https://www.autocentrum.pl/Yzg4YmIudhsGVi9eZg57D0UOe0IoFnQcDlg8Qi4UNRYCRiBAOR02DggbbAktRz0ZBQdsVXoUaRxXUmsOfRZhQgVWdwc5EnsH"},
+                    {name: "Opel Astra", year: 2021, img: "https://www.autocentrum.pl/Yzg4YmIudhsGVi9eZg57D0UOe0IoFnQcDlg8Qi4UNRYCRiBAOR02DggbbAktRz0ZBQdsVXoUaRxXUmsOfRZhQgVWdwc5EnsH"}
+                ]
+           }
+        },
+        methods: {
+            getClass(val){
+                if(val < 2000){
+                    return 'dark';
+                    console.log('dark');
+                }else{
+                    return 'green';
+                    console.log('green');
+                }
+            }
+        }
+    }).mount("#app")
+</script>
+
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        *{
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    font-family: monospace;
+    }
+
+    h1{
+        color: red;
+        margin-bottom: 20px;
+    }
+
+    .normal {
+        font-size: small;
+        color: black;
+    }
+
+    .insane{
+        font-size: large;
+        color: red;
+    }
+    </style>
+</head>
+<body>
+    <h1>03: Events</h1>
+    <div id="app">
+        <div class="events3">
+            <span>Dyrektywa v-on:click oraz v-on:keyup.enter</span>
+            <br>
+            <ul>
+                <li v-for="item in items"><div :class="{'insane': item.checked}">{{item.text}}<input type="checkbox" v-model="item.checked"></div></li>
+            </ul>
+        </div>
+
+        <input type="text" value="{{newName}}" v-model="newName" @keyup.enter="add"> <button @click="add">Dodaj chechboxa!</button>
+    </div>
+
+
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    items: [
+                        { text: "element 1", checked: true },
+                        { text: "element 2", checked: false },
+                        { text: "element 3", checked: false },
+                    ],
+                    newName: ''
+                }
+            },
+
+            methods:{
+                add: function(){
+                    this.items.push({text: this.newName, checked: false})
+                    this.newName = '';
+                }
+            }
+        }).mount("#app")
+    </script>
+</body>
+</html>

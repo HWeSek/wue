@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main_style.css">
+    <title>Cwiczenia</title>
+    <script>
+        function init() {
+
+            const options = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+            };
+
+            fetch("/getFiles", options)
+                .then(response => response.json()) // konwersja na obiekt json, jeśli konieczne
+                .then(data => {
+                    for (file of data) {
+                        let box = document.createElement('a');
+                        box.setAttribute('class', 'fileBox')
+                        box.setAttribute('href', `${file}`)
+                        box.innerText = `${file}`;
+                        document.getElementById('container').appendChild(box);
+                    }
+                })
+                .catch(error => console.log(error));
+        };
+    </script>
+</head>
+
+<body onload="init()">
+    <h1>Ćwiczenia - VUE</h1>
+    <div id="container">
+
+    </div>
+</body>
+
+</html>

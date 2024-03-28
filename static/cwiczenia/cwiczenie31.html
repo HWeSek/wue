@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        *{
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    font-family: monospace;
+    }
+
+    h1{
+        color: red;
+        margin-bottom: 20px;
+    }
+
+    .normal {
+        font-size: small;
+        color: black;
+    }
+
+    .insane{
+        font-size: large;
+        color: red;
+    }
+    </style>
+</head>
+<body>
+    <h1>01: FORMULARZ DSHAOUADAHSAPOIAEDEDNSAAD</h1>
+    <div id="app">
+        <div>
+            <br>
+            <form action="/aaa" method="POST" @reset="reset" @submit="submit">
+                <input type="text">
+                <input type="submit">
+                <input type="reset">
+            </form>
+            <input type="checkbox" v-model="checked">
+        </div>
+        <h3>{{text}}</h3>
+    </div>
+
+
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    checked: true,
+                    text: 'info'
+                }
+            },
+
+            methods:{
+                reset: function(e){
+                    if(this.checked){
+                        e.preventDefault();
+                        this.text = 'FORMULARZ NIE RESETUJE SIE!'
+                    }
+                    else{
+                        this.text = 'FORMULARZ ZRESETOWANY'
+                    }
+                    
+                },
+                submit: function(e){
+                    if(this.checked){
+                        e.preventDefault();
+                        this.text = 'FORMULARZ NIE WYSYLA SIE!'
+                    }
+                    else{
+                        this.text = 'FORMULARZ WYSLANY!'
+                    }
+                },
+            }
+        }).mount("#app")
+    </script>
+</body>
+</html>
