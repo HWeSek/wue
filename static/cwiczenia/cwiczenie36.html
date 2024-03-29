@@ -112,11 +112,12 @@
                 }
             },
             status: function(){
-                console.log(this.agreed, this.shipping, this.payment);
                 if (this.agreed == true) {
                         if(this.shipping != undefined){
                             if(this.payment != undefined){
+                                console.log(this.data.products);
                                 for(product of this.data.products){
+                                    console.log(product);
                                     if(product.checked){
                                         return true;
                                     }

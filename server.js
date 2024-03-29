@@ -6,16 +6,16 @@ const fs = require("fs")
 
 const data = {
     products: [
-        { name: "Myszka", checked: 'false' },
-        { name: "Laptop", checked: 'false' },
-        { name: "Komputer", checked: 'false' },
-        { name: "Monitor", checked: 'false' },
-        { name: "Głośniki", checked: 'false' },
-        { name: "Słuchawki", checked: 'false' },
-        { name: "Mikrofon", checked: 'false' },
-        { name: "Klawiatura", checked: 'false' },
-        { name: "Pendrive", checked: 'false' },
-        { name: "Dupsko czorne", checked: 'false' },
+        { name: "Myszka", checked: false },
+        { name: "Laptop", checked: false },
+        { name: "Komputer", checked: false },
+        { name: "Monitor", checked: false },
+        { name: "Głośniki", checked: false },
+        { name: "Słuchawki", checked: false},
+        { name: "Mikrofon", checked: false },
+        { name: "Klawiatura", checked: false },
+        { name: "Pendrive", checked: false },
+        { name: "Dupsko czorne", checked: false },
     ],
     shipping: [
 
