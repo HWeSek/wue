@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        *{
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    font-family: monospace;
+    }
+
+    h1{
+        color: red;
+        margin-bottom: 20px;
+    }
+    h2 {
+        color: blue;
+        margin-bottom: 10px;
+    }
+
+    h3{
+        text-decoration: underline;
+        color: rgb(44, 44, 44);
+    }
+    </style>
+</head>
+<body>
+    <h1>06: SKLEP </h1>
+    <div id="app">
+        <div style="background-color: rgb(223, 223, 223);">
+            <form action="/buy" method="post">
+                <div style="width: 50%; float: left; padding: 30px;" >
+                    <h2>Dodaj do koszyka</h2>
+                    <h3>Produkty: </h3>
+                    <div style="width: 400px; display: flex; flex-wrap: wrap;">
+                        <template v-for="(product, i) in data.products"> 
+                                <label style="width: 120px;"><input type="checkbox" :name="product.name" v-model="product.checked" @change="list()">{{product.name}}</label>
+                        </template>
+                    </div>
+                    <h3>Dostawa: </h3>
+                    <table>
+                        <tr v-for="opt in data.shipping">
+                            <td><img :src="'../gfx/'+opt.img" width="50px"></td>
+                            <td><label><input type="radio" name="dostawa" :value="opt.option" v-model="shipping">{{opt.option}}</label></td>
+                        </tr>
+                    </table>
+                    <h3>Płatność: </h3>
+                    <table>
+                        <tr v-for="opt in data.payment">
+                            <td><img :src="'../gfx/'+opt.img" width="50px"></td>
+                            <td><label><input type="radio" name="dostawa" :value="opt.option" v-model="payment">{{opt.option}}</label></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <hr>
+                    <label>POTWIERDZAM DUPA DUPA DUPA <input type="checkbox" v-model="agreed"></label>
+
+                </div>
+                <div>
+                    <div style="background-color: aliceblue; margin: 50px; width: 500px; min-height: 200px; padding: 20px;">
+                        <h2>PODSUMOWANIE</h2>
+                        <hr>
+                        <h3>Zakupy: </h3>
+                        <div v-for="item in this.koszyk">{{item}}</div>
+                        <hr>
+                        <p>Sposób dostawy: {{shipping}}</p>
+                        <hr>
+                        <p>Sposób dostawy: {{payment}}</p>
+                        <hr>
+                        <input type="submit" value="KUPUJ!" :disabled="!status()">
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+
+    <script>
+        const app = Vue.createApp({
+        data() {
+            console.log("data", new Date().getTime())
+            return {
+                data: {},
+                agreed: false,
+                shipping: undefined,
+                payment: undefined,
+                koszyk: []
+            }
+
+        },
+        async created() {
+           console.log("created", new Date().getTime())
+           let res = await fetch('/getData');
+           this.data = await res.json();
+           console.log(this.data);
+        },
+        mounted() {
+           console.log("mounted", new Date().getTime())
+        },
+        methods: {
+            list: function(){
+                this.koszyk = [];
+                for(product of this.data.products){
+                    if(product.checked == true){
+                        this.koszyk.push(product.name)
+                    }
+                }
+            },
+            status: function(){
+                console.log(this.agreed, this.shipping, this.payment);
+                if (this.agreed == true) {
+                        if(this.shipping != undefined){
+                            if(this.payment != undefined){
+                                for(product of this.data.products){
+                                    if(product.checked){
+                                        return true;
+                                    }
+                                }
+                            }else{
+                                return false;
+                            }                     
+                        }else{
+                            return false
+                        }
+                    }else{
+                        return false;
+                    }
+            }
+        }
+        }).mount("#app")
+    </script>
+</body>
+</html>

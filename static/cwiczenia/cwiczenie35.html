@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        *{
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    font-family: monospace;
+    }
+
+    h1{
+        color: red;
+        margin-bottom: 20px;
+    }
+
+    .normal {
+        font-size: small;
+        color: black;
+    }
+
+    .insane{
+        font-size: large;
+        color: red;
+    }
+    form {
+        display: flex;
+        flex-direction: row;
+        align-items: start;
+    }
+    table {
+        margin: 15px;
+    }
+    </style>
+</head>
+<body>
+    <h1>03: FORMULARZ DYNAMICZNY</h1>
+    <div id="app">
+        <div>
+            <br>
+            <form action="" method="POST">
+                <table>
+                    <tr><th>Akcesoria</th></tr>
+                    <tr v-for="item in products">
+                        <td>
+                            <label><input type="checkbox" true-value="tak" false-value="nie" v-model="item.checked"> {{item.name}}</label><br>
+                            {{item.price}} {{item.currency}}
+                        </td>
+                    </tr>
+                </table>
+                <table>
+                    <tr><th>Forma odbioru</th></tr>
+                    <tr v-for="option in options">
+                        <td>
+                            <label><input type="radio" v-model="selected" name="send" true-value="tak" false-value="nie" :value="option.option"> {{option.option}}</label><br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><select v-model="selected">
+                            <option v-for="option in options" :value="option.option">
+                                {{option.option}}
+                            </option>
+                        </select></td>
+                        
+                    </tr>
+                    <tr>
+                        <td>Wybrano: {{selected}}</td>
+                    </tr>
+                </table>
+                <table>
+                    <tr><th>Potwierdzenie</th></tr>
+                    <tr><td>
+                        <label><input type="checkbox" v-model="aggred">ZGADZAM SIE DUPA DUP DA</label>
+                    </td></tr>
+                    <tr>
+                        <td>
+                            <input type="submit" :disabled="!status">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+    </div>
+
+
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    products: [
+                    { name: "Myszka", checked: 'nie', price: 30, currency: "PLN" },
+                    { name: "Laptop", checked: 'nie', price: 2500, currency: "GBP" },
+                    { name: "Komputer", checked: 'nie', price: 4000, currency: "PLN" },
+                    { name: "Monitor", checked: 'nie', price: 1000, currency: "GBP" },
+                    { name: "Głośniki", checked: 'nie', price: 600, currency: "USD" }
+                ],
+                options: [
+
+                   { option: 'Kurier' },
+                   { option: 'Poczta' },
+                   { option: 'Osobiście' }
+
+                ],
+                aggred: false,
+                selected: undefined
+                }
+            },
+
+            methods:{
+                
+            },
+            computed: {
+                status: function(){
+                    if (this.aggred) {
+                        if(this.selected != undefined){
+                            for(product of this.products){
+                                if(product.checked == 'tak'){
+                                    return true;
+                                }
+                            }
+                        }else{
+                            return false
+                        }
+                    }else{
+                        return false;
+                    }
+                }
+            }
+        }).mount("#app")
+    </script>
+</body>
+</html>
