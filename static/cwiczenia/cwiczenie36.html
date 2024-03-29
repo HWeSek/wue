@@ -52,7 +52,7 @@
                     <table>
                         <tr v-for="opt in data.payment">
                             <td><img :src="'../gfx/'+opt.img" width="50px"></td>
-                            <td><label><input type="radio" name="dostawa" :value="opt.option" v-model="payment">{{opt.option}}</label></td>
+                            <td><label><input type="radio" name="platnosc" :value="opt.option" v-model="payment">{{opt.option}}</label></td>
                         </tr>
                     </table>
                     <br>

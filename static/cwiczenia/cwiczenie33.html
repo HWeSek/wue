@@ -27,40 +27,58 @@
         font-size: large;
         color: red;
     }
+    form {
+        display: flex;
+        flex-direction: row;
+        align-items: start;
+    }
+    table {
+        margin: 15px;
+    }
     </style>
 </head>
 <body>
-    <h1>03: FORMULARZ DSHAOUADAHSAPOIAEDEDNSAAD</h1>
+    <h1>03: FORMULARZ DYNAMICZNY</h1>
     <div id="app">
         <div>
             <br>
             <form action="" method="POST">
                 <table>
-                    <tr>
-                        <th>Akcesoria</th>
-                        <th>Forma odbioru</th>
-                        <th>Potwierdzenie</th>
-                    </tr>
-                    <tr>
-                        <td><label><input type="checkbox" v-model="mysz" true-value="tak" false-value="nie"/> Myszka </label></td>
-                        <td><label><input type="radio" name="how" v-model="dostawa" value="kurier" /> kurier</label></td>
-                        <td><label><input type="checkbox" v-model="aggred">POTWEIRDDZAAM</label></td>
-                    </tr>
-                    <tr>
-                        <td><label><input type="checkbox" v-model="laptop" true-value="tak" false-value="nie"/> Laptop </label></td>
-                        <td><label><input type="radio" name="how" v-model="poczta" value="poczta" /> poczta</label></td>
-                        <td><label><input type="submit" :disabled="status"></label></td>
-                    </tr>
-                    <tr>
-                       <td><label><input type="checkbox" v-model="pc" true-value="tak" false-value="nie"/> PC </label></td>
-                       <td><label><input type="radio" name="how" v-model="osobiscie" value="osobiscie" /> osobiscie</label></td>
-                    </tr>
-                    <tr>
-                        <td></td>
+                    <tr><th>Akcesoria</th></tr>
+                    <tr v-for="item in products">
                         <td>
-                            <select v-model="selected">
-                                
-                            </select>
+                            <label><input type="checkbox" true-value="tak" false-value="nie" v-model="item.checked"> {{item.name}}</label><br>
+                            {{item.price}} {{item.currency}}
+                        </td>
+                    </tr>
+                </table>
+                <table>
+                    <tr><th>Forma odbioru</th></tr>
+                    <tr v-for="option in options">
+                        <td>
+                            <label><input type="radio" v-model="selected" name="send" true-value="tak" false-value="nie"> {{option.option}}</label><br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><select v-model="selected">
+                            <option v-for="option in options" value="option.option">
+                                {{option.option}}
+                            </option>
+                        </select></td>
+                        
+                    </tr>
+                    <tr>
+                        <td>Wybrano: {{selected}}</td>
+                    </tr>
+                </table>
+                <table>
+                    <tr><th>Potwierdzenie</th></tr>
+                    <tr><td>
+                        <label><input type="checkbox" v-model="aggred">ZGADZAM SIE DUPA DUP DA</label>
+                    </td></tr>
+                    <tr>
+                        <td>
+                            <input type="submit" :disabled="!aggred">
                         </td>
                     </tr>
                 </table>
@@ -75,7 +93,6 @@
             data() {
                 return {
                     products: [
-
                     { name: "Myszka", checked: 'nie', price: 30, currency: "PLN" },
                     { name: "Laptop", checked: 'nie', price: 2500, currency: "GBP" },
                     { name: "Komputer", checked: 'nie', price: 4000, currency: "PLN" },
@@ -99,11 +116,7 @@
             },
             computed: {
                 status: function(){
-                    if(this.aggred && (this.mysz == 'tak' || this.laptop == 'tak' || this.pc == 'tak') && (this.dostawa || this.poczta || this.osobiscie)){
-                        return false
-                    }else{
-                        return true
-                    }
+
                 }
             }
         }).mount("#app")
