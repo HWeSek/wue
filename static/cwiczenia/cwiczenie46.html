@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        *{
+    box-sizing: border-box;
+    font-family: monospace;
+    }
+
+    h1{
+        color: red;
+        margin-bottom: 20px;
+    }
+    h2 {
+        color: blue;
+        margin-bottom: 10px;
+    }
+
+    h3{
+        text-decoration: underline;
+        color: rgb(44, 44, 44);
+    }
+    </style>
+</head>
+<body>
+    <h1>06: KOMPOty2 </h1>
+    <div id="app">
+        
+        <dziecko v-for="digit in digitsArr" :wartosc="digit"></dziecko>
+    </div>
+
+
+    <script>
+        const dziecko = {
+                
+        template: `
+            <div style=" background: white; border: 3px solid black; width: fit-content; margin: 15px;">               
+                <h2>init: {{this.wartosc}}</h2>
+                <h2>now: {{x}}</h2>
+                <button @click="add">dodaj 1</button>
+            </div>    
+        
+        `,
+        
+        props: ["wartosc"],
+        methods: {
+            add(){
+                this.x++;
+            }
+        },
+        data () {
+            return {
+                x: this.wartosc
+            }
+        }
+        };
+
+        const app = Vue.createApp({
+        data() {
+            return {
+                digitsArr: [1,4,16]
+            };
+        },
+        methods: {
+            add(){
+                this.x++;
+            }
+        },
+        components: {
+            "dziecko": dziecko
+        }
+        }).mount("#app")
+    </script>
+</body>
+</html>
