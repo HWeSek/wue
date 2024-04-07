@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<style>
+    *{
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    font-family: monospace;
+}
+
+h1{
+    color: red;
+    margin-bottom: 20px;
+}
+</style>
+<body>
+    <h1>01: Komponenty</h1>
+    <div id="app">
+        <div class="components">
+            <span>Rejestracja komponentu - components {}</span>
+            <br>
+            <component-a></component-a>
+            <component-b></component-b>
+            <component-c></component-c>
+        </div>
+    </div>
+    
+
+    <script>
+        const ComponentA = {
+            template: "<h3>Items</h3>"
+        }
+
+        const ComponentB = {
+            template: "<h3>AddItem</h3>"
+        }
+
+        const ComponentC = {
+            template: "<h3>DeleteItem</h3>"
+        }
+        
+        const app = Vue.createApp({
+            components: {
+                "component-a": ComponentA,
+                "component-b": ComponentB,
+                "component-c": ComponentC
+            }
+        }).mount("#app")
+    </script>
+</body>
+</html>

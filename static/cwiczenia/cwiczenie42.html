@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<style>
+    *{
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    font-family: monospace;
+}
+
+h1{
+    color: red;
+    margin-bottom: 20px;
+}
+</style>
+<body>
+    <h1>02: Komponenty</h1>
+    <div id="app">
+        <div class="components">
+            <span>Dane i template</span>
+            <br>
+            <component-a></component-a>
+            <component-a></component-a>
+            <component-a></component-a>
+        </div>
+    </div>
+    
+
+    <script>
+        const ComponentA = {
+            data(){},
+            props: ["propA", "propB"],
+            template: `<div style='border: 2px dashed black; margin: 20px;'><h2> {{name}} </h2><h3>ZawÃ³d: {{job}} </h3><h3>Stan: {{state}} </h3></div>`
+        }
+        
+        const app = Vue.createApp({
+            components: {
+                    "component-a": ComponentA
+            }
+        }).mount("#app")
+    </script>
+</body>
+</html>
