@@ -29,8 +29,8 @@
 <body>
     <h1>06: KOMPOty2 </h1>
     <div id="app">
-        
-        <dziecko v-for="digit in digitsArr" :wartosc="digit"></dziecko>
+        <h1>DATA: {{dupa}}</h1>
+        <dziecko :funck="changeValue"></dziecko>
     </div>
 
 
@@ -39,17 +39,16 @@
                 
         template: `
             <div style=" background: white; border: 3px solid black; width: fit-content; margin: 15px;">               
-                <h2>init: {{this.wartosc}}</h2>
-                <h2>now: {{x}}</h2>
-                <button @click="add">dodaj 1</button>
+                <button @click="add(111)">dodaj 111</button>
+                <button @click="add(222)">dodaj 222</button>
+                <button @click="add(333)">dodaj 333</button>
             </div>    
         
         `,
-        
-        props: ["wartosc"],
+        props: ["funck"],
         methods: {
-            add(){
-                this.x++;
+            add(val){
+                this.funck(val)
             }
         },
         data () {
@@ -62,12 +61,12 @@
         const app = Vue.createApp({
         data() {
             return {
-                digitsArr: [1,4,16]
+                dupa: 111
             };
         },
         methods: {
-            add(){
-                this.x++;
+            changeValue(val){
+                this.dupa = val;
             }
         },
         components: {
